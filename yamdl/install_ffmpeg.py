@@ -6,6 +6,7 @@ import sys
 def install_ffmpeg():
     system = platform.system().lower()
 
+    # Install ffmpeg using winget on windows
     if system == 'windows':
         try:
             subprocess.run(['winget', 'install', '--id', 'ffmpeg'], check=True)
@@ -26,6 +27,7 @@ def install_ffmpeg():
             print('Unable to determine Linux distribution.')
             sys.exit(1)
 
+        # Checks the distribution of Linux
         if distro in ['ubuntu', 'debian']:
             subprocess.run(['sudo', 'apt', 'update'], check=True)
             subprocess.run(['sudo', 'apt', 'install', '-y', 'ffmpeg'], check=True)
