@@ -4,6 +4,8 @@ Ever wondered where those .mp3 files we used to download disappeared? The reason
 
 This Simple Python project aims to download High-Quality Audio from YouTube videos and convert them to MP3 format so you have a backup for yourself.
 
+You will never need those creepy & malicious websites to download .mp3 files ever again.
+
 ## Project Structure
 
 - `converter.py`: Contains the logic for converting downloaded audio files to MP3 format.
