@@ -1,6 +1,6 @@
 # Yet Another Music Downloader (yamdl)
 
-Ever wondered where those .mp3 files we used to download disappeared? The reason is streaming services ended the downloads of .mp3 files. I was playing GTA 5 when I realised that I don't have any .mp3 files anymore to listen on the radio.
+Ever wondered where those .mp3 files we used to download disappeared? The reason is streaming services ended the downloads of .mp3 files.
 
 This Simple Python project aims to download audio from YouTube videos and convert them to MP3 format so you have a backup for yourself.
 
