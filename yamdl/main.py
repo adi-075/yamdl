@@ -1,15 +1,18 @@
 import os
 import subprocess
 import sys
+import time
 
 from converter import convert_audio
 from downloader import download_audio
+
 
 def check_and_install(package):
     try:
         __import__(package)
     except ImportError:
         subprocess.check_call([sys.executable, '-m', 'pip', 'install', package])
+
 
 def check_ffmpeg():
     try:
@@ -27,7 +30,7 @@ def check_ffmpeg():
 
 
 if __name__ == "__main__":
-    # Check and install required packages
+    # Check and install required python packages
     check_and_install('yt_dlp')
 
     # Check if ffmpeg is installed
@@ -36,24 +39,34 @@ if __name__ == "__main__":
     # Proceed with the user input
     url = input("Enter the URL of the video: ")
 
-    # Check if the user wants to make a Music Directory in the cwd
-    set_music_cwd = input("Do you want to Download in the Current Directory? [Y/n]").lower()
-    if set_music_cwd == 'y':
-        cwd = os.getcwd()
+    # Set custom download path here
+    download_path = None
+
+    # Saves the Music to your Music Directory
+    if download_path is None:
+        download_path = os.path.expanduser('~/Music')
+
+        print("No Download Directory was specified!")
+        time.sleep(2)
+
+        print(f"Defaulting Downloads to this Folder:{download_path}")
+        time.sleep(3)
+
+        # Clear the screen
+        os.system('cls' if os.name == 'nt' else 'clear')
+    else:
         folder = "Music"
-        folder_path = os.path.join(cwd, folder)
+        folder_path = os.path.join(download_path, folder)
         # Create the new folder if it doesn't already exist
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
             print(f"Folder: '{folder}' created successfully.")
         else:
             print(f"Folder: '{folder}' already exists.")
-        download_path = os.path.join(os.getcwd(), 'Music')
-    else:
-        # Stores in the User Music Directory
-        download_path = os.path.expanduser('~/Music')
+        download_path = os.path.join(download_path, folder)
 
     # Download the audio file
+    print(os.path.abspath(download_path))
     download_audio(url, download_path)
 
     # Convert all downloaded files to MP3
