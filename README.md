@@ -6,13 +6,6 @@ This Simple Python project aims to download High-Quality Audio from YouTube vide
 
 You will never need those creepy & malicious websites to download .mp3 files ever again.
 
-## Project Structure
-
-- `converter.py`: Contains the logic for converting downloaded audio files to MP3 format.
-- `downloader.py`: Handles downloading audio from YouTube using `yt-dlp`.
-- `install_ffmpeg.py`: Installs `ffmpeg` on your system if it is not already installed.
-- `main.py`: The main script that ties everything together, handling command-line arguments, checking for required dependencies, and invoking the download and conversion processes.
-
 ## Installation
 
 1. **Clone the repository:**
@@ -34,8 +27,7 @@ You will never need those creepy & malicious websites to download .mp3 files eve
 
 ## Usage
 
-You can use the `main.py` script to download and convert audio. The script accepts command-line arguments for the YouTube video URL and optionally the directory where the audio files should be saved.
-
+You can use the `main.py` script to download and convert audio. The script defaults the music download to the Current Working Directory but it can be saved in the user's music directory.
 ### Example
 
 To download audio from a YouTube video and save it to a specified directory:
@@ -44,3 +36,10 @@ To download audio from a YouTube video and save it to a specified directory:
 python main.py 
 Enter the URL of the video: "https://youtube.com/somevideourl"
 ```
+
+## Project Structure
+
+- `converter.py`: Contains the logic for converting downloaded audio files to MP3 format.
+- `downloader.py`: Handles downloading audio from YouTube using `yt-dlp`.
+- `install_ffmpeg.py`: Installs `ffmpeg` on your system if it is not already installed.
+- `main.py`: The main script that ties everything together, handling command-line arguments, checking for required dependencies, and invoking the download and conversion processes.
