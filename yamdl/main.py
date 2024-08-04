@@ -29,6 +29,30 @@ def check_ffmpeg():
             sys.exit(1)
 
 
+def get_music_download_directory(download_path):
+    # Change the folder name to anything you want
+    folder = "Yamdl"
+    # Determine the base download path
+    if download_path is None:
+        base_path = os.path.expanduser('~/Music')
+        print("No Download Directory was specified!")
+        time.sleep(2)
+        print(f"Defaulting Downloads to this Folder: {base_path}")
+        time.sleep(3)
+        # Clear the screen
+        os.system('cls' if os.name == 'nt' else 'clear')
+    else:
+        base_path = os.path.join(download_path, folder)
+        # Create the new folder if it doesn't already exist
+        if not os.path.exists(base_path):
+            os.makedirs(base_path)
+            print(f"Folder: '{folder}' created successfully.")
+        else:
+            print(f"Folder: '{folder}' already exists.")
+
+    return base_path
+
+
 if __name__ == "__main__":
     # Check and install required python packages
     check_and_install('yt_dlp')
@@ -40,39 +64,17 @@ if __name__ == "__main__":
     url = input("Enter the URL of the video: ")
 
     # Set custom download path here
-    download_path = None
-
-    # Saves the Music to your Music Directory
-    if download_path is None:
-        download_path = os.path.expanduser('~/Music')
-
-        print("No Download Directory was specified!")
-        time.sleep(2)
-
-        print(f"Defaulting Downloads to this Folder:{download_path}")
-        time.sleep(3)
-
-        # Clear the screen
-        os.system('cls' if os.name == 'nt' else 'clear')
-    else:
-        folder = "Music"
-        folder_path = os.path.join(download_path, folder)
-        # Create the new folder if it doesn't already exist
-        if not os.path.exists(folder_path):
-            os.makedirs(folder_path)
-            print(f"Folder: '{folder}' created successfully.")
-        else:
-            print(f"Folder: '{folder}' already exists.")
-        download_path = os.path.join(download_path, folder)
+    base_Installation = None
+    path = get_music_download_directory(base_Installation)
 
     # Download the audio file
-    print(os.path.abspath(download_path))
-    download_audio(url, download_path)
+    print(f"Download will begin at this location:{os.path.abspath(path)}")
+    download_audio(url, path)
 
     # Convert all downloaded files to MP3
-    for file_name in os.listdir(download_path):
+    for file_name in os.listdir(path):
         if file_name.endswith(('.webm', '.m4a', '.opus')):
-            full_path = os.path.join(download_path, file_name)
-            convert_audio(full_path, download_path)
+            full_path = os.path.join(path, file_name)
+            convert_audio(full_path, path)
 
-    print(f"Audio has been downloaded and saved to {download_path}")
+    print(f"Audio has been downloaded and saved to {path}")
