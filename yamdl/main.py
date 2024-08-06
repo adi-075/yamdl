@@ -68,12 +68,11 @@ if __name__ == "__main__":
     # Add the optional download directory argument
     parser.add_argument('-d', '--dir', metavar='dir', type=str, default=None,
                         help="Download directory (default is ~/Music)")
-
     args = parser.parse_args()
     url = args.url
-
     download_dir = args.dir
-    # Pass the download directory to this function
+
+    # Pass the optional argument to this function
     path = get_music_download_directory(download_dir)
     print(f"Download will now begin at this location: {os.path.abspath(path)}")
 

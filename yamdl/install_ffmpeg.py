@@ -6,7 +6,7 @@ import sys
 def install_ffmpeg():
     system = platform.system().lower()
 
-    # Install ffmpeg using winget on windows
+    # Install ffmpeg using the winget store on windows
     if system == 'windows':
         try:
             subprocess.run(['winget', 'install', '--id', 'ffmpeg'], check=True)
