@@ -15,11 +15,11 @@ You will never need those creepy & malicious websites to download .mp3 files eve
     cd yamdl
     ```
 
-2. **Install required Python packages:**
+2. **Install required Python Dependencies:**
 
-    ```sh
-    pip install yt-dlp
     ```
+   The required dependencies are auto-installed by the program.
+   ```
 
 3. **Installing ffmpeg:**
 
@@ -27,15 +27,29 @@ You will never need those creepy & malicious websites to download .mp3 files eve
 
 ## Usage
 
-You can use the `main.py` script to download and convert audio. The script defaults the music download to the Current Working Directory but it can be saved in the user's music directory.
+You can use the `main.py` script to download and convert audio. The script defaults the music download to the User's Music Directory but it can be saved to any directory you want with an optional argument --dir.
 ### Example
 
-To download audio from a YouTube video and save it to a specified directory:
+
 
 ```python
-python main.py 
-Enter the URL of the video: "https://youtube.com/somevideourl"
+python main.py -h
+usage: main.py [-h] [-d dir] url
+
+Yamdl is a CLI utility to download Music from YouTube Videos
+
+positional arguments:
+  url                Enter the YouTube video URL
+
+options:
+  -h, --help         show this help message and exit
+  -d dir, --dir dir  Download directory (default is ~/Music)
+
 ```
+
+It takes a positional argument url to download the music<br>
+You can optionally change the download directory using ``-d`` argument
+
 
 ## Project Structure
 
