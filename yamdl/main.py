@@ -1,3 +1,4 @@
+import argparse
 import os
 import subprocess
 import sys
@@ -32,8 +33,8 @@ def check_ffmpeg():
 def get_music_download_directory(download_path):
     # Change the folder name to anything you want
     folder = "Yamdl"
-    # Determine the base download path
-    if download_path is None:
+    # Determine the download path and if it's None, default to user's music directory
+    if download_path is None or download_path == '.':
         base_path = os.path.expanduser('~/Music')
         print("No Download Directory was specified!")
         time.sleep(2)
@@ -54,21 +55,29 @@ def get_music_download_directory(download_path):
 
 
 if __name__ == "__main__":
-    # Check and install required python packages
+    # Check and install required dependencies
     check_and_install('yt_dlp')
+    check_and_install('chardet')
 
     # Check if ffmpeg is installed
     check_ffmpeg()
 
-    # Proceed with the user input
-    url = input("Enter the URL of the video: ")
+    # Arguments for cli
+    parser = argparse.ArgumentParser(description="Yamdl is a CLI utility to download Music from YouTube Videos")
+    parser.add_argument('url', metavar='url', type=str, help="Enter the YouTube video URL")
+    # Add the optional download directory argument
+    parser.add_argument('-d', '--dir', metavar='dir', type=str, default=None,
+                        help="Download directory (default is ~/Music)")
 
-    # Set custom download path here
-    base_Installation = None
-    path = get_music_download_directory(base_Installation)
+    args = parser.parse_args()
+    url = args.url
+
+    download_dir = args.dir
+    # Pass the download directory to this function
+    path = get_music_download_directory(download_dir)
+    print(f"Download will now begin at this location: {os.path.abspath(path)}")
 
     # Download the audio file
-    print(f"Download will begin at this location:{os.path.abspath(path)}")
     download_audio(url, path)
 
     # Convert all downloaded files to MP3
