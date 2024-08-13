@@ -4,8 +4,6 @@ import subprocess
 import sys
 import time
 
-from converter import convert_audio
-from downloader import download_audio
 
 
 def check_and_install(package):
@@ -58,6 +56,10 @@ if __name__ == "__main__":
     # Check and install required dependencies
     check_and_install('yt_dlp')
     check_and_install('chardet')
+
+    # Importing these after installing the packages
+    from converter import convert_audio
+    from downloader import download_audio
 
     # Check if ffmpeg is installed
     check_ffmpeg()
